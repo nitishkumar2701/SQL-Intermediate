@@ -45,13 +45,13 @@ SELECT top (5) * FROM [dbo].[Dim_Date]
 
 -- SQL Aliasing
 
--- SQL processes the WHERE clause before the SELECT clause applies aliases, so the alias doesn't exist yet when the WHERE condition is evaluated. 
--- WHERE – Cannot use aliases ✗
--- GROUP BY – Cannot use aliases ✗
--- HAVING – Cannot use aliases ✗
--- JOIN ON – Can use aliases ✓
--- SELECT – Can use aliases ✓
--- ORDER BY – Can use aliases ✓
+-- Clause	       Table Aliases?	Column Aliases?	Why?
+-- FROM / JOIN	Yes ✓	              No ✗	              This is where Table aliases are born.
+-- WHERE	       Yes ✓	              No ✗	              Occurs before SELECT defines column aliases.
+-- GROUP BY	       Yes ✓	              No ✗	              Occurs before SELECT defines column aliases.
+-- HAVING	       Yes ✓	              No ✗	              Occurs before SELECT defines column aliases.
+-- SELECT	       Yes ✓	              Yes ✓	              This is where Column aliases are born.
+-- ORDER BY	       Yes ✓	              Yes ✓	              Occurs after SELECT, so it sees everything.
 
 SELECT TOP (10) 
        [Country_ID] C_ID
