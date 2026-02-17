@@ -44,9 +44,37 @@ SELECT top (5) * FROM [dbo].[Dim_Date]
 
 
 -- SQL Aliasing
+
+-- SQL processes the WHERE clause before the SELECT clause applies aliases, so the alias doesn't exist yet when the WHERE condition is evaluated. 
+-- WHERE – Cannot use aliases ✗
+-- GROUP BY – Cannot use aliases ✗
+-- HAVING – Cannot use aliases ✗
+-- JOIN ON – Can use aliases ✓
+-- SELECT – Can use aliases ✓
+-- ORDER BY – Can use aliases ✓
+
+SELECT TOP (10) 
+       [Country_ID] C_ID
+      ,[Country_Name] C_Name
+      ,[Country_ISO_Code] C_ISO_Code
+      ,[Is_EU_Member] C_IS_Member
+      ,[Continent] C_Continent
+  FROM [dbo].[Dim_Country]
+  WHERE [Is_EU_Member] = 1 -- Aliasing invalid in WHERE CLAUSE so use original column
+  ORDER BY C_Name ASC -- Aliasing is Valid in ORDER BY CLAUSE so use alias name
+
+
 -- TradeGroup is the alias name for the table dbo.Dim_Trade_Group
 -- Fact is the alias name for the table dbo.Fact_Trade
-Select TradeGroup.Trade_Group_Name , TradeGroup.Trade_Group_Category , Fact.Trade_Value 
+SELECT TradeGroup.Trade_Group_Name , TradeGroup.Trade_Group_Category , Fact.Trade_Value 
 FROM dbo.Dim_Trade_Group TradeGroup
 JOIN dbo.Fact_Trade Fact
 ON TradeGroup.Trade_Group_Id = Fact.Trade_Group_ID
+
+-- Aliasing can be used on GROUP BY CLAUSE also the number of columns in select should match the number of columns in the group by clause.
+SELECT TradeGroup.Trade_Group_Name , TradeGroup.Trade_Group_Category , Fact.Trade_Value 
+FROM dbo.Dim_Trade_Group TradeGroup
+JOIN dbo.Fact_Trade Fact
+ON TradeGroup.Trade_Group_Id = Fact.Trade_Group_ID
+GROUP BY TradeGroup.Trade_Group_Name , TradeGroup.Trade_Group_Category , Fact.Trade_Value 
+
