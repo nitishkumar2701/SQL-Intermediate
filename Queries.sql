@@ -40,3 +40,13 @@ SELECT top (5) * FROM [dbo].[Dim_Date]
 -- 123	    January	        2023	    1	            0
 -- 124	    January	        2024	    1	            0
 -- 125	    January	        2025	    1	            1
+
+
+
+-- SQL Aliasing
+-- TradeGroup is the alias name for the table dbo.Dim_Trade_Group
+-- Fact is the alias name for the table dbo.Fact_Trade
+Select TradeGroup.Trade_Group_Name , TradeGroup.Trade_Group_Category , Fact.Trade_Value 
+FROM dbo.Dim_Trade_Group TradeGroup
+JOIN dbo.Fact_Trade Fact
+ON TradeGroup.Trade_Group_Id = Fact.Trade_Group_ID
