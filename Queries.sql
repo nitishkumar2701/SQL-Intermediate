@@ -102,3 +102,63 @@ WHERE F.Date_ID > 125                       -- Step 2: Filter raw rows
 GROUP BY TG.Trade_Group_Category            -- Step 3: Group the data
 HAVING SUM(F.Trade_Value) > 26317587654.00  -- Step 4: Filter the groups
 ORDER BY Total DESC;                        -- Step 7: Sort by the alias "Total"
+
+
+
+-- JOINS
+
+create table Customer1(
+    id int PRIMARY KEY,
+    cusname varchar(25)
+)
+
+create table Customer2(
+    id int PRIMARY KEY,
+    cusname varchar(25)
+)
+
+insert into Customer1(id,cusname) values (1,'James')
+insert into Customer1(id,cusname) values (2,'Arthur')
+insert into Customer1(id,cusname) values (3,'Philips')
+insert into Customer1(id,cusname) values (4,'Gunter')
+insert into Customer1(id,cusname) values (5,'Pluto')
+insert into Customer1(id,cusname) values (6,'')
+insert into Customer1(id,cusname) values (7,'Vinde')
+
+
+insert into Customer2(id,cusname) values (1,'Jimmy')
+insert into Customer2(id,cusname) values (2,'Arthur')
+insert into Customer2(id,cusname) values (3,'Pluto')
+insert into Customer2(id,cusname) values (4,'Gunter')
+insert into Customer2(id,cusname) values (5,'Billy')
+insert into Customer2(id,cusname) values (6,'Clinton')
+insert into Customer2(id,cusname) values (7,'')
+
+select * from Customer1
+select * from Customer2
+
+select * from Customer1 inner join Customer2 
+ON Customer1.cusname = Customer2.cusname
+
+select * from Customer1 inner join Customer2 
+ON Customer1.id = Customer2.id
+
+select * from Customer1 full outer join Customer2 
+ON Customer1.id = Customer2.id
+
+select * from Customer1 full outer join Customer2 
+ON Customer1.cusname = Customer2.cusname
+
+select * from Customer1 left join Customer2 
+ON Customer1.cusname = Customer2.cusname
+
+select * from Customer1 left join Customer2 
+ON Customer1.id = Customer2.id
+
+select * from Customer1 right join Customer2 
+ON Customer1.cusname = Customer2.cusname
+
+select * from Customer1 right join Customer2 
+ON Customer1.id = Customer2.id
+
+select * from Customer1 cross join Customer2
