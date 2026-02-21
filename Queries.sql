@@ -162,3 +162,17 @@ select * from Customer1 right join Customer2
 ON Customer1.id = Customer2.id
 
 select * from Customer1 cross join Customer2
+
+select * from Customer1 
+UNION 
+select * from Customer2
+-- Union operation happens without duplicates between two tables
+
+select * from Customer1 
+UNION ALL
+select * from Customer2
+-- Union operation happens with duplicates between two tables
+
+-- Difference between Where and Having Clause
+-- WHERE - Filters rows before aggregation ; Works on Individual Rows ; Filtering Raw Data
+-- HAVING - Filters groups after aggregation ; Works on aggregated data ; Filtering Grouped Data
