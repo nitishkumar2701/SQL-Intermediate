@@ -176,3 +176,18 @@ select * from Customer2
 -- Difference between Where and Having Clause
 -- WHERE - Filters rows before aggregation ; Works on Individual Rows ; Filtering Raw Data
 -- HAVING - Filters groups after aggregation ; Works on aggregated data ; Filtering Grouped Data
+
+-- Example: Combining WHERE and HAVING
+-- Find departments where:
+
+-- Employees earning below 40,000 are excluded.
+-- Total salary for the remaining employees exceeds 150,000.
+-- SELECT department_name, SUM(salary) AS total_salary
+-- FROM employees
+-- WHERE salary > 40000
+-- GROUP BY department_name
+-- HAVING SUM(salary) > 150000;
+-- Explanation:
+-- The WHERE clause filters out individual rows where salary ≤ 40,000.
+-- The GROUP BY clause groups the remaining rows by department.
+-- The HAVING clause filters departments where the total salary ≤ 150,000.
