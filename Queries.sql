@@ -191,3 +191,17 @@ select * from Customer2
 -- The WHERE clause filters out individual rows where salary ≤ 40,000.
 -- The GROUP BY clause groups the remaining rows by department.
 -- The HAVING clause filters departments where the total salary ≤ 150,000.
+
+-- EXISTS IN SQL
+
+select id,cusname from Customer1 
+Where Exists 
+(select id from Customer1 where id > 4 ) -- True
+
+-- Exists runs the query based on the contional sub query where conditional sub query is "(select id from Customer1 where id > 7 )"
+
+select id,cusname from Customer1 
+Where Exists 
+(select id from Customer1 where id > 9 ) -- False
+
+-- here the conditional sub query fails so it returns noithing
